@@ -59,7 +59,7 @@ export function addPerson(person) {
 }
 
 let objectImg;
-export function addImgToShow(addToDB) {
+export function addImgToShow() {
     let transaction = db.transaction(["images"], "readwrite")
     let store = transaction.objectStore("images");
     let inpImg = document.getElementById("file")
@@ -71,7 +71,7 @@ export function addImgToShow(addToDB) {
         if (imgFile) {
             imgURL = URL.createObjectURL(imgFile);
             titleImg = imgFile.name
-            console.log(imgFile.name)
+            // console.log(imgFile.name)
             // titleImg.split("").map((el, index) => {
             //     if (el == ".") {
             //         return titleImg = titleImg.slice(0, index)
@@ -93,6 +93,7 @@ export function addImgToShow(addToDB) {
                 fullTime = `${date.getHours()}:${date.getMinutes()}`
             }
 
+
             let obj = {
                 name: imgFile.name,
                 // name: titleImg,
@@ -112,9 +113,12 @@ export function addImgToShow(addToDB) {
             document.getElementById("img_size").innerText = this.width + 'x' + this.height
             document.getElementById("img_date").innerText = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
             document.getElementById("img_time").innerText = fullTime
+            document.getElementById("file").setAttribute("data-name", titleImg)
 
-       console.log(obj)
+
+            // console.log(obj)
         }
+
     }
 }
 
@@ -125,7 +129,7 @@ export function addImgToDB() {
     store.get("image").onsuccess = (e)=>{
         store.add(objectImg)
     }
-    console.log(objectImg)
+    // console.log(objectImg)
 
     // var transaction = db.transaction(["images"], "readwrite")
     // var store = transaction.objectStore("images");

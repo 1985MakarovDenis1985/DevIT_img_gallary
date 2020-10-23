@@ -2,7 +2,7 @@ import React, {useEffect, useState, Fragment} from 'react';
 import {HashRouter, Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import GalleryBox from "./components/GalleryBox";
-import AddBox from "./components/AddBox";
+import AddImgAndInformationBox from "./components/AddImgAndInformationBox";
 import {setImg} from "./redux/actions/actions";
 import {dbTrue, dbFalse} from "./redux/actions/actions";
 import {createDataBase, getAllImg, db} from "./indexedDB/db";
@@ -26,7 +26,7 @@ function App() {
 
             {dbStore == true ?
                 <Fragment>
-                    <AddBox/>
+                    <AddImgAndInformationBox/>
                     <GalleryBox/>
                 </Fragment>
                 :

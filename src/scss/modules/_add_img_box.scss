@@ -142,6 +142,27 @@
           font-size: 21px;
         }
       }
+
+      #add_error{
+        position: absolute;
+        right: 0;
+        bottom: 10%;
+        width: 35%;
+        height: 20%;
+        //border: 1px solid red;
+        text-align: justify;
+        word-break: break-word;
+        color: red;
+        animation-name: nothing;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        opacity: 0;
+        text-align: end;
+
+        @media screen and(max-width: 1440px){
+          font-size: 12px;
+        }
+      }
     }
 
 

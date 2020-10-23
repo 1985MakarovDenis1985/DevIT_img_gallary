@@ -11,9 +11,10 @@ $color-shadow: #583711;
   position: absolute;
 }
 
-//@import "modules/kaemframes";
+@import "modules/keyframes";
 @import "modules/gallery_box";
 @import "modules/add_img_box";
+@import "modules/info_page";
 
 .main_container{
   width: 100vw;

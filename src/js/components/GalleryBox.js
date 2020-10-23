@@ -13,7 +13,6 @@ function GalleryBox() {
     const dbStore = useSelector(store => store.indexDB_reducer.db)
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         setTimeout(() => {
             getAllImg()
@@ -24,13 +23,12 @@ function GalleryBox() {
                                 dispatch(setImg(el))
                             }
                         })
-                    }, 130)
+                    }, 350)
                 })
-        }, 100)
+        }, 200)
     }, [])
 
-    let copyArrOfImage=[]
-
+    let copyArrOfImage = []
 
     function remEl(e) {
         let arrImgBox = Array.from(document.getElementsByClassName("img_item"))
@@ -42,16 +40,13 @@ function GalleryBox() {
                 el.setAttribute("data-id", index)
                 removeItem(el.dataset.name)
                 dispatch(removeImg(index))
-                console.log(el.dataset.name)
             } else {
                 console.log("error")
             }
         })
     }
 
-    function imgLoad(e){
-        // e.target.dataset.url
-
+    function imgLoad(e) {
         function download(url, filename) {
             // Request
             fetch(url, {
@@ -74,35 +69,31 @@ function GalleryBox() {
             })
         }
 
-        download(e.target.dataset.url, e.target.dataset.name);
-
-        //// ------------------
-        // let url = window.location.href
-        // // let myFile = this.href;
-        // console.log();
-        // let img = document.createElement("a")
-        // img.href = "https://images.wallpaperscraft.ru/image/klen_list_osen_190739_1920x1080.jpg"
-        // img.download = window.location.href
-        // img.click()
-
-
-        //// ------------------- ////
-        // var xhr = new XMLHttpRequest();
-        // var url = e.target.dataset.url;
-        // xhr.responseType = 'blob'; //Set the response type to blob so xhr.response returns a blob
-        // xhr.open('GET', url , true);
-        //
-        // xhr.onreadystatechange = function () {
-        //     if (xhr.readyState == xhr.DONE) {
-        //         //When request is done
-        //         //xhr.response will be a Blob ready to save
-        //         saveAs(xhr.response, 'image.jpeg');
-        //     }
-        // };
-        //
-        // xhr.send()
+        // images.map((el, index)=>{
+            // if (el.url == e.target.dataset.url){
+                console.log(e.target.dataset.src)
+                download(e.target.dataset.src, e.target.dataset.name);
+            // }
+        // })
     }
 
+    function createInfoImg(e){
+        images.map(el=>{
+            if (el.name == e.target.dataset.name){
+
+                document.getElementById("img_info_name").innerText = el.name
+                document.getElementById("img_info_type").innerText = el.type
+                document.getElementById("img_info_weight").innerText = el.size
+                document.getElementById("img_info_size").innerText = el.naturalSize
+                document.getElementById("img_info_date").innerText = el.date
+                document.getElementById("img_info_time").innerText = el.time
+                document.getElementById("img_info_desc").innerText = el.desc
+                document.getElementById("img_info_format").innerText = el.format
+                document.getElementById("img_info_src").src = el.url
+
+            }
+        })
+    }
 
 
     return (
@@ -111,15 +102,12 @@ function GalleryBox() {
             {/*{console.log(copyArrOfImage = JSON.parse(JSON.stringify(images)))}*/}
             <input className="search" type="text"/>
             <div className="images_gallery_box">
-
+                {/*{console.log(images)}*/}
                 {images.map((el, index) => (
                     <div className="img_item" data-name={el.name}
                          key={el.name + el.email + (Math.floor(Math.random() * Math.floor(1000)))}>
-                        <img src={el.url} alt="" className="image"/>
-                        {/*<h5>{el.name}</h5>*/}
-                        {/*<span>{el.size}</span>*/}
-                        {/*<a href={el.url}>click</a>*/}
-                        <button onClick={imgLoad} data-name={el.name} data-url={el.url} id="download">download</button>
+                        <img onClick={createInfoImg} data-weigth={el.naturalSize} data-mimetype={el.type} data-name={el.name} data-size={el.size}  src={el.url}  alt="" className="image"/>
+                        <button onClick={imgLoad} data-name={el.name} data-src={el.url} id="download">download</button>
                         <button className="btn_remove" data-name={el.name} onClick={remEl}>remove
                         </button>
                     </div>
