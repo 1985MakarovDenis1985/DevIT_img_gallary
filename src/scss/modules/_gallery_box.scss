@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+
+
+.images_gallery_container {
+  width: 100%;
+  height: 60%;
+  border: 1px solid red;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .search{
+    z-index: 100;
+  }
+
+  .images_gallery_box {
+    width: 96%;
+    height: 80%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //padding: 15px;
+    overflow: scroll;
+  }
+
+  .img_item {
+    z-index: 100;
+    width: 15%;
+    margin: 15px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .gallery_box_title {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 13%;
+    box-sizing: border-box;
+    font-family: 'Fascinate', cursive;
+    font-size: 400%;
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+
+}

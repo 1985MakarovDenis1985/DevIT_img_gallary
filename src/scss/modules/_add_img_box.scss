@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
+.images_form_box {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+
+  //// ADD BOX
+  .add_box, .inform_item_box {
+    width: 45%;
+    height: 90%;
+  }
+
+  .add_box {
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .label_input_wrapper {
+      width: 50%;
+      height: 100%;
+      //border: 1px solid red;
+
+      .form_add_items {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .select_img{
+          //border: 1px solid red;
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          border-radius: 15px;
+          z-index: 100;
+          position: absolute;
+          padding-top: 10px;
+          font-family: 'Fascinate', cursive;
+          font-size: 1.5rem;
+          color: rgba(0,0,0,0.5);
+        }
+
+        .img_template {
+          width: 100% !important;
+          height: 85% !important;
+          border-radius: 30px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          z-index: 10;
+        }
+
+      }
+    }
+
+    .btn_box {
+      width: 50%;
+      height: 100%;
+      //display: flex;
+      //flex-direction: column;
+      //justify-content: center;
+      //align-items: flex-start;
+      //border: 1px solid red;
+      padding-top: 2%;
+      padding-left: 15px;
+      position: relative;
+
+      #description{
+        float: left;
+        bottom: 0px;
+        position: absolute;
+        left: 15px;
+        height: 35%;
+        width: 60%;
+        border-color: #824d0f;
+        border-radius: 5px;
+      }
+
+      .desc_text{
+        font-size: 23px;
+        //border: 1px solid red;
+        margin-right: 10px;
+        width: 45%;
+        float: left;
+        font-weight: bold;
+        font-family: 'Viga', sans-serif;
+        color: #583711;
+
+        span{
+          font-weight: lighter;
+          color: gray;
+          color: #824d0f;
+        }
+
+        @media screen and (max-width: 1440px) {
+        font-size: 15px;
+        }
+      }
+
+      #format{
+        margin-bottom: 15px;
+        float: left;
+        background: none;
+        font-family: 'Viga', sans-serif;
+        border-color: #824d0f;
+        color: #583711;
+        border-radius: 3px;
+      }
+
+      .clearfix{
+        float: none;
+      }
+
+      #addImgBtn{
+        //height: 85%;
+        //width: 50%;
+        //border-radius: 15px;
+        border: none;
+        background: transparent;
+        font-family: 'Fascinate', cursive;
+        font-size: 1.5rem;
+        color: rgba(0,0,0,0.5);
+        //margin-top: 10px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border: #824d0f 1px solid;
+        color: #824d0f;
+        border-radius: 5px;
+
+        @media screen and (max-width: 1440px) {
+          font-size: 21px;
+        }
+      }
+    }
+
+
+    .file {
+      display: none;
+    }
+
+
+  }
+
+
+  //// INFO BOX
+  //.inform_item_box{
+  //  width: 49%;
+  //  height: 98%;
+  //  border: 1px solid red;
+  //}
+
+}
+
+#check{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+}

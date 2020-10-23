@@ -5,15 +5,21 @@ $main_box_shadow : 10px 10px 5px 0px rgba(0,0,0,0.75);
 $color-shadow1: #824d0f;
 $color-shadow: #583711;
 
-
+@mixin boxPos{
+  box-sizing: border-box;
+  border: 1px solid grey;
+  position: absolute;
+}
 
 //@import "modules/kaemframes";
-@import "modules/content";
+@import "modules/gallery_box";
+@import "modules/add_img_box";
 
 .main_container{
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background: #f8f3ed;
   overflow: hidden;

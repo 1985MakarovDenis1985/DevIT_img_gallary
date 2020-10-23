@@ -17,6 +17,8 @@ function App() {
     const dispatch = useDispatch()
 
 
+
+
     createDataBase(dispatch(dbTrue()))
 
     return (
@@ -24,8 +26,8 @@ function App() {
 
             {dbStore == true ?
                 <Fragment>
-                    <GalleryBox/>
                     <AddBox/>
+                    <GalleryBox/>
                 </Fragment>
                 :
                 <Fragment>
