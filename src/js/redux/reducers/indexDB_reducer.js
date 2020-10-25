@@ -10,12 +10,10 @@ export const indexDB_reducer = (state = initiallyState, action) => {
             return {
                 db: true
             }
-
         case DB_FALSE :
             return {
                 db: false
             }
-
         default :
             return state
     }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {addImgToShow, getAllImg, addImgToDB, db} from "../indexedDB/db";
 import {setImg,} from "../redux/actions/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 function AddImgBox() {
 
     const images = useSelector(state => state.imgReducer.images)
-    const dbStore = useSelector(store => store.indexDB_reducer.db)
     const dispatch = useDispatch()
 
     function selectImg(e) {
@@ -18,7 +17,7 @@ function AddImgBox() {
     }
 
 
-    function addImg(e) {
+    function addImgToCollection(e) {
         e.preventDefault()
         let inputImgValue = document.getElementById("file")
         let errorTextToAdd = document.getElementById("add_error")
@@ -27,11 +26,10 @@ function AddImgBox() {
             el.name == inputImgValue.dataset.name ? temp = false : temp = temp
         })
 
+        /// lite validation
         if (inputImgValue.value && temp == true) {
             errorTextToAdd.innerText = ""
             addImgToDB()
-            // setTimeout(() => {
-            // return new Promise(resolve => {
                 getAllImg()
                     .then((data) => {
                         setTimeout(() => {
@@ -39,9 +37,7 @@ function AddImgBox() {
                         }, 50)
                     }).then(() => {
                 })
-            // })
-
-            // }, 0)
+            //// error text appear
         } else if (!inputImgValue.value) {
             errorTextToAdd.style.animationName = "nothing"
             setTimeout(()=>{
@@ -86,11 +82,11 @@ function AddImgBox() {
                 <p className="desc_text">time: <span id="img_time">...</span></p>
 
                 <textarea onChange={selectImg} name="" id="description"
-                          placeholder="description"></textarea>
+                          placeholder="description..."></textarea>
 
                 <form action="">
                     <p id="add_error"></p>
-                    <button onClick={addImg} id="addImgBtn">Add Img</button>
+                    <button onClick={addImgToCollection} id="addImgBtn">Add Img</button>
                 </form>
             </div>
         </div>

@@ -9,10 +9,8 @@ function AddImgAndInformationBox() {
 
     return (
         <div className="images_form_box">
-
             <AddImgBox/>
             <BoxInfo/>
-
         </div>
     );
 

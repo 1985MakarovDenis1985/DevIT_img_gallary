@@ -24,7 +24,6 @@ function App() {
 
     return (
         <div className="main_container">
-
             {dbStore == true ?
                 <Fragment>
                     <AddImgAndInformationBox/>

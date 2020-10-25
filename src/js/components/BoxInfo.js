@@ -26,8 +26,6 @@ function BoxInfo() {
                     <p className="desc_text"><span id="img_info_desc">...</span></p>
                 </div>
             </div>
-
-            {/*<span onClick={getI} id="a" href="">image</span>*/}
         </div>
     );
 

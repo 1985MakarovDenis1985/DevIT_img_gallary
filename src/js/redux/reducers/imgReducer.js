@@ -1,5 +1,4 @@
-import {ADD_COLLECTION, ADD_IMG} from "../types"
-import {REMOVE_IMG} from "../types";
+import {REMOVE_IMG, ADD_IMG} from "../types";
 
 const initiallyState = {
     images: []
@@ -12,9 +11,6 @@ export const imgReducer = (state = initiallyState, action) => {
 
         case REMOVE_IMG :
             return {...state, images: state.images.filter((el, index)=>el.name != action.payload)}
-
-        // case ADD_COLLECTION :
-        //     return {...state, images: action.payload}
 
         default :
             return state

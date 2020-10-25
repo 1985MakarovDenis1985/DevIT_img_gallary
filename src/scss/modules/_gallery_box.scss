@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
 
 .images_gallery_container {
   width: 100%;
   height: 60%;
-  border: 1px solid red;
+  //border: 1px solid red;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -12,14 +13,42 @@
   justify-content: center;
   align-items: center;
 
-  .search_removeAll_box{
+  .search_removeAll_box {
     z-index: 100;
-    border: 1px solid red;
+    //border: 1px solid red;
     width: 96%;
     height: 10%;
+    position: relative;
 
-    .search{
+    .btn_clear_db {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 10%;
+      background: bisque;
+      border: 1px solid #824d0f;
+      border-radius: 3px;
+      font-family: 'Fascinate', cursive;
+      color: #824d0f;
+    }
+
+    .count_item_in_db {
+      position: absolute;
+      right: 12%;
+      top: 0;
+      font-family: 'Viga', sans-serif;
+      color: #824d0f;
+    }
+
+    #search {
       z-index: 100;
+      border-radius: 3px;
+      border: #824d0f 1px solid;
+    }
+
+    .labelForSearch {
+      font-family: 'Viga', sans-serif;
+      color: #824d0f;
     }
   }
 
@@ -27,13 +56,15 @@
   .images_gallery_box {
     width: 96%;
     height: 80%;
-    border: 1px solid red;
+    border: 1px solid #824d0f;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     //padding: 15px;
     overflow: scroll;
     position: relative;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(130, 77, 15, 0.54);
+    box-shadow: 5px 5px 15px 5px rgba(130, 77, 15, 0.54);
   }
 
   .img_item {
@@ -63,25 +94,25 @@
     color: rgba(0, 0, 0, 0.3);
   }
 
-  .btn_remove{
+  .btn_remove {
     position: absolute;
     z-index: 100;
     top: 3%;
     right: 5%;
     border-radius: 3px;
-    background: rgba(255,255,255, 0.7);
+    background: rgba(255, 255, 255, 0.7);
     transition: .3s;
     border: 1px solid transparent;
 
-    &:hover{
+    &:hover {
       //border: 1px solid red;
-      background: rgba(0,0,0, 0.7);
+      background: rgba(0, 0, 0, 0.7);
       color: red;
     }
 
   }
 
-  .active_line, .move_line{
+  .active_line, .move_line {
     width: 100%;
     position: absolute;
     height: 3px;
@@ -91,7 +122,7 @@
     z-index: 100;
   }
 
-  .move_line{
+  .move_line {
     background: transparent;
     z-index: 10;
   }

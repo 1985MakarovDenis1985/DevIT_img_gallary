@@ -1,9 +1,7 @@
-import React, {Fragment, useEffect, useState} from 'react';
-import {HashRouter, Link} from "react-router-dom";
+import React, { useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {removeItem, db, createDataBase, getAllImg} from "../indexedDB/db";
-import {setImg, removeImg, dbTrue, dbFalse, addCollection} from "../redux/actions/actions";
-import {indexDB_reducer} from "../redux/reducers/indexDB_reducer";
+import {removeItem, getAllImg, removeAllCollection} from "../indexedDB/db";
+import {setImg, removeImg, addCollection} from "../redux/actions/actions";
 
 
 //----------------------------
@@ -11,11 +9,9 @@ import {indexDB_reducer} from "../redux/reducers/indexDB_reducer";
 function GalleryBox() {
 
     const images = useSelector(state => state.imgReducer.images)
-    const dbStore = useSelector(store => store.indexDB_reducer.db)
     const copyGallery = useSelector(store => store.copyGalleryForSearch.images)
     const dispatch = useDispatch()
 
-    const [gallery, setGallery] = useState([])
 
     useEffect(() => {
         getAllImg()
@@ -39,29 +35,17 @@ function GalleryBox() {
 
         arrImgBox.map((el, index) => {
             if (e.target.dataset.name == el.dataset.name) {
-                // el.setAttribute("data-id", el.dataset.name)
                 removeItem(el.dataset.name)
-                // console.log(el.dataset.name)
                 dispatch(removeImg(el.dataset.name))
                 console.log(images)
             }
-            // else {
-            //     console.log("error")
-            // }
         })
-
-        // arrImgBox.map((el, index) => {
-        //     if (e.target.dataset.name == el.dataset.name) {
-        //         el.setAttribute("data-id", index)
-        //         removeItem(el.dataset.name)
-        //         dispatch(removeImg(index))
-        //     } else {
-        //         console.log("error")
-        //     }
-        // })
     }
 
 
+    /*
+    imgLoad => working normal only before first reload page
+     */
     function imgLoad(e) {
         function download(url, filename) {
             // Request
@@ -84,13 +68,7 @@ function GalleryBox() {
                 console.log(error);
             })
         }
-
-        // images.map((el, index)=>{
-        // if (el.url == e.target.dataset.url){
-        console.log(e.target.dataset.src)
         download(e.target.dataset.src, e.target.dataset.name);
-        // }
-        // })
     }
 
     function activeImg_activeLine(e) {
@@ -132,38 +110,35 @@ function GalleryBox() {
     function search(e) {
         e.preventDefault()
         dispatch(addCollection(images))
-        console.log(copyGallery)
-        // let galleryDOM = Array.from(document.getElementsByClassName("img_item"))
-        // galleryDOM.map(el => el.style.display = "block")
-        // // gall.map(el=>el.style.display = "none")
         let searchForm = document.getElementById("search");
         let searchRegExp = new RegExp(searchForm.value, ["i"]);
         let products = images.filter(el => searchRegExp.test(el.name));
-        // // x = products
         dispatch(addCollection(products))
-        // return x
-        // console.log(x)
     }
 
 
-    function z(){
-        console.log(copyGallery)
+    function clearAllCollection(){
+        let conf = confirm("are you sure you to want delete all images?")
+        if(conf) {
+            removeAllCollection()
+            location.reload()
+        } else return
+
     }
+
 
     return (
         <div className="images_gallery_container">
             <p className="gallery_box_title">GALLERY BOX</p>
-            {/*{console.log(copyArrOfImage = JSON.parse(JSON.stringify(images)))}*/}
             <div className="search_removeAll_box">
-                <form action="">
-                    <input onChange={search} id="search" name="search" type="text"/>
-                    <label htmlFor="search" style={{marginLeft: "10px"}}>SEARCH</label>
+                <form onChange={search} action="">
+                    <input  id="search" name="search" type="text"/>
+                    <label htmlFor="search" className="labelForSearch" style={{marginLeft: "10px"}}>SEARCH</label>
                 </form>
-                <button onClick={z}>click</button>
-                <p id="p"></p>
+               <p className="count_item_in_db">Item in DB: {images.length}</p>
+                <button className="btn_clear_db" onClick={clearAllCollection}>REMOVE ALL</button>
             </div>
             <div className="images_gallery_box">
-                {/*{console.log(gallery)}*/}
                 {copyGallery.map((el, index) => (
                     <div className="img_item" data-name={el.name}
                          key={el.name + el.email + (Math.floor(Math.random() * Math.floor(1000)))}>
@@ -179,7 +154,5 @@ function GalleryBox() {
             </div>
         </div>
     )
-
 }
-
 export default GalleryBox;
