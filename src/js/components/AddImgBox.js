@@ -63,10 +63,10 @@ function AddImgBox() {
             <div className="label_input_wrapper">
                 <form className="form_add_items" action="submit">
                     <label className="select_img" htmlFor="file">SELECT IMAGE</label>
-                    <input onChange={selectImg} data-name="jjj" name="file" className="file" id="file" type="file"
+                    <input onChange={selectImg} name="file" className="file" id="file" type="file"
                            multiple="multiple"/>
                     <img style={{width: "100px", height: "80px"}} className="img_template" id="img"
-                         src="img/absent_img.jpg" alt=""/>
+                         src="img/bg/absent_img.jpg" alt=""/>
                 </form>
             </div>
 
@@ -85,7 +85,7 @@ function AddImgBox() {
                 <p className="desc_text">date: <span id="img_date">...</span></p>
                 <p className="desc_text">time: <span id="img_time">...</span></p>
 
-                <textarea defaultValue="nothing..." onChange={selectImg} name="" id="description"
+                <textarea onChange={selectImg} name="" id="description"
                           placeholder="description"></textarea>
 
                 <form action="">

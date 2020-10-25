@@ -5,16 +5,16 @@ const initiallyState = {
     images: []
 }
 
-export const imgReducer = (state = initiallyState, action) => {
+export const copyGalleryForSearch = (state = initiallyState, action) => {
     switch (action.type) {
-        case ADD_IMG :
-            return {...state, images: state.images.concat(action.payload)}
-
+        // case ADD_IMG :
+        //     return {...state, images: state.images.concat(action.payload)}
+        //
         case REMOVE_IMG :
             return {...state, images: state.images.filter((el, index)=>el.name != action.payload)}
 
-        // case ADD_COLLECTION :
-        //     return {...state, images: action.payload}
+        case ADD_COLLECTION :
+            return {...state, images: action.payload}
 
         default :
             return state

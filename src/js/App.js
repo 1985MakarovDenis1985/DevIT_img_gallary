@@ -17,9 +17,10 @@ function App() {
     const dispatch = useDispatch()
 
 
-
-
-    createDataBase(dispatch(dbTrue()))
+    createDataBase()
+        .then(()=>{
+            dispatch(dbTrue())
+        })
 
     return (
         <div className="main_container">

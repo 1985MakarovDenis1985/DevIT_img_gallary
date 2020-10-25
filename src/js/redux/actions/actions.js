@@ -1,7 +1,8 @@
-import {ADD_IMG,
+import {
+    ADD_IMG,
     REMOVE_IMG,
     DB_FALSE,
-    DB_TRUE
+    DB_TRUE, ADD_COLLECTION
 } from "../types";
 
 export function setImg(img) {
@@ -27,5 +28,12 @@ export function dbTrue() {
 export function dbFalse() {
     return {
         type: DB_FALSE
+    }
+}
+
+export function addCollection(collection) {
+    return {
+        type: ADD_COLLECTION,
+        payload: collection
     }
 }

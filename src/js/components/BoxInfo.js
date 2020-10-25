@@ -8,7 +8,7 @@ function BoxInfo() {
             <p className="desc_text desc_text_type">type: <span id="img_info_format">...</span></p>
 
             <div className="img_box">
-                <img className="img_info" id="img_info_src" src="../../img/bg/bg_img_info_box.jpg" alt=""/>
+                <img className="img_info" id="img_info_src" src="img/bg/bg_img_info_box.jpg" alt=""/>
             </div>
             <div className="desc_box">
                 <div className="left_block">

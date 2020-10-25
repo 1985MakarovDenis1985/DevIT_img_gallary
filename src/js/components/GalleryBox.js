@@ -1,9 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {HashRouter, Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {removeItem, getAllImg, db, getAll, createDataBase} from "../indexedDB/db";
-import {setImg, removeImg, dbTrue, dbFalse} from "../redux/actions/actions";
+import {removeItem, db, createDataBase, getAllImg} from "../indexedDB/db";
+import {setImg, removeImg, dbTrue, dbFalse, addCollection} from "../redux/actions/actions";
 import {indexDB_reducer} from "../redux/reducers/indexDB_reducer";
+
 
 //----------------------------
 
@@ -11,40 +12,55 @@ function GalleryBox() {
 
     const images = useSelector(state => state.imgReducer.images)
     const dbStore = useSelector(store => store.indexDB_reducer.db)
+    const copyGallery = useSelector(store => store.copyGalleryForSearch.images)
     const dispatch = useDispatch()
 
+    const [gallery, setGallery] = useState([])
+
     useEffect(() => {
-        setTimeout(() => {
-            getAllImg()
-                .then((data) => {
-                    setTimeout(() => {
-                        data.map(el => {
-                            if (el != data[data.length - 1]) {
-                                dispatch(setImg(el))
-                            }
-                        })
-                    }, 350)
+        getAllImg()
+            .then((data) => {
+                data.map(el => {
+                    if (el != data[data.length - 1]) {
+                        dispatch(setImg(el))
+                    }
                 })
-        }, 200)
+                return data
+            })
     }, [])
 
-    let copyArrOfImage = []
+    useEffect(()=>{
+        dispatch(addCollection(images))
+    }, [images])
+
 
     function remEl(e) {
         let arrImgBox = Array.from(document.getElementsByClassName("img_item"))
-        // arrImgBox.reverse().map((el, index) => {
-        //     el.setAttribute("data-id", index)
-        // })
+
         arrImgBox.map((el, index) => {
             if (e.target.dataset.name == el.dataset.name) {
-                el.setAttribute("data-id", index)
+                // el.setAttribute("data-id", el.dataset.name)
                 removeItem(el.dataset.name)
-                dispatch(removeImg(index))
-            } else {
-                console.log("error")
+                // console.log(el.dataset.name)
+                dispatch(removeImg(el.dataset.name))
+                console.log(images)
             }
+            // else {
+            //     console.log("error")
+            // }
         })
+
+        // arrImgBox.map((el, index) => {
+        //     if (e.target.dataset.name == el.dataset.name) {
+        //         el.setAttribute("data-id", index)
+        //         removeItem(el.dataset.name)
+        //         dispatch(removeImg(index))
+        //     } else {
+        //         console.log("error")
+        //     }
+        // })
     }
+
 
     function imgLoad(e) {
         function download(url, filename) {
@@ -70,17 +86,35 @@ function GalleryBox() {
         }
 
         // images.map((el, index)=>{
-            // if (el.url == e.target.dataset.url){
-                console.log(e.target.dataset.src)
-                download(e.target.dataset.src, e.target.dataset.name);
-            // }
+        // if (el.url == e.target.dataset.url){
+        console.log(e.target.dataset.src)
+        download(e.target.dataset.src, e.target.dataset.name);
+        // }
         // })
     }
 
-    function createInfoImg(e){
-        images.map(el=>{
-            if (el.name == e.target.dataset.name){
+    function activeImg_activeLine(e) {
+        Array.from(document.getElementsByClassName("active_line")).map((el, index) => {
+            el.style.background = "transparent"
+            if (el.dataset.id == e.target.dataset.id) {
+                el.style.background = "red"
+            }
+        })
+    }
 
+    function activeImg_moveLine(e) {
+        Array.from(document.getElementsByClassName("move_line")).map((el, index) => {
+            el.style.background = "transparent"
+            if (el.dataset.id == e.target.dataset.id) {
+                el.style.background = "grey"
+            }
+        })
+    }
+
+    function createInfoImg(e) {
+        activeImg_activeLine(e)
+        images.map(el => {
+            if (el.name == e.target.dataset.name) {
                 document.getElementById("img_info_name").innerText = el.name
                 document.getElementById("img_info_type").innerText = el.type
                 document.getElementById("img_info_weight").innerText = el.size
@@ -90,31 +124,61 @@ function GalleryBox() {
                 document.getElementById("img_info_desc").innerText = el.desc
                 document.getElementById("img_info_format").innerText = el.format
                 document.getElementById("img_info_src").src = el.url
-
             }
         })
     }
 
 
+    function search(e) {
+        e.preventDefault()
+        dispatch(addCollection(images))
+        console.log(copyGallery)
+        // let galleryDOM = Array.from(document.getElementsByClassName("img_item"))
+        // galleryDOM.map(el => el.style.display = "block")
+        // // gall.map(el=>el.style.display = "none")
+        let searchForm = document.getElementById("search");
+        let searchRegExp = new RegExp(searchForm.value, ["i"]);
+        let products = images.filter(el => searchRegExp.test(el.name));
+        // // x = products
+        dispatch(addCollection(products))
+        // return x
+        // console.log(x)
+    }
+
+
+    function z(){
+        console.log(copyGallery)
+    }
+
     return (
         <div className="images_gallery_container">
             <p className="gallery_box_title">GALLERY BOX</p>
             {/*{console.log(copyArrOfImage = JSON.parse(JSON.stringify(images)))}*/}
-            <input className="search" type="text"/>
+            <div className="search_removeAll_box">
+                <form action="">
+                    <input onChange={search} id="search" name="search" type="text"/>
+                    <label htmlFor="search" style={{marginLeft: "10px"}}>SEARCH</label>
+                </form>
+                <button onClick={z}>click</button>
+                <p id="p"></p>
+            </div>
             <div className="images_gallery_box">
-                {/*{console.log(images)}*/}
-                {images.map((el, index) => (
+                {/*{console.log(gallery)}*/}
+                {copyGallery.map((el, index) => (
                     <div className="img_item" data-name={el.name}
                          key={el.name + el.email + (Math.floor(Math.random() * Math.floor(1000)))}>
-                        <img onClick={createInfoImg} data-weigth={el.naturalSize} data-mimetype={el.type} data-name={el.name} data-size={el.size}  src={el.url}  alt="" className="image"/>
-                        <button onClick={imgLoad} data-name={el.name} data-src={el.url} id="download">download</button>
-                        <button className="btn_remove" data-name={el.name} onClick={remEl}>remove
-                        </button>
+                        <img className="image" onClick={createInfoImg} onMouseOver={activeImg_moveLine}
+                             data-weigth={el.naturalSize} data-mimetype={el.type} data-id={index} data-name={el.name}
+                             data-size={el.size} src={el.url} alt=""/>
+                        {/*<button onClick={imgLoad} data-name={el.name} data-src={el.url} id="download">download</button>*/}
+                        <div className="active_line" data-id={index}></div>
+                        <div className="move_line" data-id={index}></div>
+                        <button className="btn_remove" data-name={el.name} onClick={remEl}>remove</button>
                     </div>
                 ))}
             </div>
         </div>
-    );
+    )
 
 }
 
