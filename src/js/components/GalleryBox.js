@@ -118,7 +118,7 @@ function GalleryBox() {
 
 
     function clearAllCollection(){
-        let conf = confirm("are you sure you to want delete all images?")
+        let conf = confirm("are you sure you to want delete all imagesForTest?")
         if(conf) {
             removeAllCollection()
             location.reload()

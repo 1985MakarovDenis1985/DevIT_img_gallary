@@ -129,6 +129,11 @@
         border: #824d0f 1px solid;
         color: #824d0f;
         border-radius: 5px;
+        transition: .3s;
+
+        &:hover{
+          background: burlywood;
+        }
 
         @media screen and (max-width: 1440px) {
           font-size: 21px;

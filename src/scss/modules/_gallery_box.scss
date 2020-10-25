@@ -25,11 +25,16 @@
       right: 0;
       top: 0;
       width: 10%;
-      background: bisque;
+      //background: bisque;
       border: 1px solid #824d0f;
       border-radius: 3px;
       font-family: 'Fascinate', cursive;
       color: #824d0f;
+      transition: .3s;
+
+      &:hover{
+        background: burlywood;
+      }
     }
 
     .count_item_in_db {
@@ -72,6 +77,9 @@
     width: 15%;
     margin: 15px;
     position: relative;
+    //animation-name: item_appear;
+    //animation-duration: .3s;
+    //animation-fill-mode: forwards;
   }
 
   .image {
