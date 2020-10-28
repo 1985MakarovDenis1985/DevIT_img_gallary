@@ -8,7 +8,7 @@ https://github.com/1985MakarovDenis1985/DevIT_img_gallary
 
 Проект «Галлерея» <br/>
 Потраченное время: 5 дней: с 21 по 25 октября включая два дня ознакомления с indexedDB <br/>
-Использовались: HTML5, SASS, REACT, REDAX, INDEXEDDB <br/>
+Использовались: HTML5, SASS, REACT, REDUX, INDEXEDDB <br/>
 
 Краткое описание:<br/>
 	Локальная галлерея.
